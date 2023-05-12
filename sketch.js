@@ -1,77 +1,74 @@
 
 const Engine = Matter.Engine;
-const World = Matter.World;
+const World= Matter.World;
 const Bodies = Matter.Bodies;
-const Body = Matter.Body;
 
-var plane
-var boddie1
-var boddie2
-var boddie3
-var engine,world
+var engine, world;
 
-function preload()
-{
-	
-}
-
-function setup() {
-	createCanvas(800, 700);
+var block1,block2,block3;
 
 
-	engine = Engine.create();
-	world = engine.world;
+function setup(){
+    var canvas = createCanvas(550,600);
+    engine = Engine.create();
+    world = engine.world;
 
-	//Crie os Corpos Aqui.
-var	 plane_options={
-	isStatic: true
-}
-  var boddie1_options = {
+    //criado corpos do plano e bloco
+    var plane_options={
+      isStatic: true
+    }
+
+    plane = Bodies.rectangle(600,580,1200,2,plane_options);
+    World.add(world,plane);
+  
+    //criados múltiplos corpos de blocos 
+    var block1_options = {
       restitution:0.5,
       friction:0.02,
       frictionAir:0
     }
 
-    var boddie2_options = {
+    var block2_options = {
       restitution:0.7,
       friction:0.01,
       frictionAir:0.1
     }
 
-    var boddie3_options = {
+    var block3_options = {
       restitution:0.01,
       friction:1,
       frictionAir:0.3
     }
 
+    block1 = Bodies.circle(220,10,10,block1_options);
+    World.add(world,block1);
+    
+    block2 = Bodies.rectangle(110,50,10,10,block2_options);
+    World.add(world,block2);
+    
+    block3 = Bodies.rectangle(350,50,10,10,block3_options);
+    World.add(world,block3);
+    
+    
+    //estilizando os corpos aqui
+    fill("brown");
+    rectMode(CENTER);
+    ellipseMode(RADIUS);
 
-plane = Bodies.rectangle(400,680,800,2,plane_options)
-World.add(world,plane)
+}
 
-boddie1 = Bodies.circle(400,30,20,boddie1_options)
-World.add(world,plane)
+function draw(){
+    background("lightgreen");
+    Engine.update(engine);
 
-boddie2 = Bodies.rectangle(200,30,100,100,boddie2_options)
-World.add(world,plane)
+  //criada forma para o plano e suporte
+  rect(plane.position.x,plane.position.y,1200);
+  
 
-boddie3 = Bodies.rectangle(600,390,300,150,boddie3_options)
-World.add(world,plane)
+  //criadas formas para todas as partículas
+  ellipse(block1.position.x,block1.position.y,30);
+  rect(block2.position.x,block2.position.y,50,50)
+  rect(block3.position.x,block3.position.y,100,50)
 
-	Engine.run(engine);
   
 }
-
-
-function draw() {
-  rectMode(CENTER);
-  background(0,255,127);
-  Engine.update(engine)
-  drawSprites();
- ellipse(boddie1.position.x, boddie1.position.y,20)
- rect(plane.position.x, plane.position.y,800,2)
- rect(boddie2.position.x, boddie2.position.y,100,100)
- rect(boddie3.position.x, boddie3.position.x,300,150)
-}
-
-
-
