@@ -26,21 +26,24 @@ function setup() {
 var	 plane_options={
 	isStatic: true
 }
+  var boddie1_options = {
+      restitution:0.5,
+      friction:0.02,
+      frictionAir:0
+    }
 
-var boddie1_options={
-	restitution: 0.5,
-	frictionAir: 0.9 
-}
+    var boddie2_options = {
+      restitution:0.7,
+      friction:0.01,
+      frictionAir:0.1
+    }
 
-var boddie2_options={
-	restitution: 0.2,
-	frictionAir: 1.2 
-}
+    var boddie3_options = {
+      restitution:0.01,
+      friction:1,
+      frictionAir:0.3
+    }
 
-var boddie3_options={
-	restitution: 0.8,
-	frictionAir: 0.2 
-}
 
 plane = Bodies.rectangle(400,680,800,2,plane_options)
 World.add(world,plane)
